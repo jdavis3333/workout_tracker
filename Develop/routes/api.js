@@ -1,23 +1,36 @@
-const mongoose = require("mongoose");
+var router = require("express").Router();
+var Workout = require("../models/workout.js");
+const { db } = require("../models/workout.js");
 
-const Schema = mongoose.Schema;
+router.get("/api/workouts", function(req, res) {
+  db.find({})
+  .then(function(workout){
+    console.log("get", workout)
+    res.send(workout)
+  })
+  .catch(function(err){
+    if(err)throw err
+  })
+})
 
-const transactionSchema = new Schema({
-  name: {
-    type: String,
-    trim: true,
-    required: "Enter a name for transaction"
-  },
-  value: {
-    type: Number,
-    required: "Enter an amount"
-  },
-  date: {
-    type: Date,
-    default: Date.now
-  }
-});
+router.put("/api/workouts", function(req, res) {
+  db.findByIdAndUpdate(req.params.id, {$push: { exercises: req.body} }, {new: true})
+  .then(function(workout){
+    console.log("get", workout)
+    res.send(workout)
+  })
+  .catch(function(err){
+    if(err)throw err
+  })
+})
 
-const Transaction = mongoose.model("Transaction", transactionSchema);
-
-module.exports = Transaction;
+router.post("/api/workouts", function(req, res) {
+  db.create(req.body)
+  .then(function(workout){
+    console.log("get", workout)
+    res.send(workout)
+  })
+  .catch(function(err){
+    if(err)throw err
+  })
+})
