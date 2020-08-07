@@ -34,3 +34,16 @@ router.post("/api/workouts", function(req, res) {
     if(err)throw err
   })
 })
+
+router.get("/api/workouts/range", function(req, res) {
+  db.find({}).limit(7)
+  .then(function(workout){
+    console.log("get", workout)
+    res.send(workout)
+  })
+  .catch(function(err){
+    if(err)throw err
+  })
+})
+
+module.exports = router;
