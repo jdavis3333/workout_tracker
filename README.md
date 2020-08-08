@@ -22,7 +22,7 @@ Workout tracker is a website that will allow you to input and track your cardio 
 
 ### Use
 
-![GIF]()
+![GIF](workout_tracker.gif)
 
 * Created schema
 ```
